@@ -56,7 +56,8 @@ export default class ModalPortal extends Component {
     shouldCloseOnEsc: PropTypes.bool,
     overlayRef: PropTypes.func,
     contentRef: PropTypes.func,
-    testId: PropTypes.string
+    testId: PropTypes.string,
+    noInlineStyles: PropTypes.bool
   };
 
   constructor(props) {
@@ -323,9 +324,9 @@ export default class ModalPortal extends Component {
     }, {});
 
   render() {
-    const { className, overlayClassName, defaultStyles } = this.props;
-    const contentStyles = className ? {} : defaultStyles.content;
-    const overlayStyles = overlayClassName ? {} : defaultStyles.overlay;
+    const { className, overlayClassName, defaultStyles, noInlineStyles } = this.props;
+    const contentStyles = className || noInlineStyles ? {} : defaultStyles.content;
+    const overlayStyles = overlayClassName || noInlineStyles ? {} : defaultStyles.overlay;
 
     return this.shouldBeClosed() ? null : (
       <div
